@@ -1759,6 +1759,10 @@ class Envs:
     # Split k-pool indexer prefill rows across attention-TP ranks and all-gather the
     # top-k once query rows x pooled keys reach this many elements; 0 disables.
     SGLANG_DSA_INDEXER_ROW_SPLIT_MIN_ELEMS = EnvInt(0)
+    # Split large single-request extends into two microbatches whose TP
+    # all-reduces overlap the other's compute (GLM-5-Next).
+    SGLANG_PREFILL_MBO = EnvBool(False)
+    SGLANG_PREFILL_MBO_MIN_TOKENS = EnvInt(4096)
     SGLANG_DISABLE_DSA_INDEXER_FUSION = EnvBool(False)
     # HIP analog of CUDA SGLANG_DISABLE_DSA_INDEXER_FUSION (default on).
     # Set 1 for the legacy split writer. Omits Hadamard; pre-quant logits match.
